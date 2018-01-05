@@ -1,25 +1,2 @@
-expose('http', ['fetch', function(fetch) {
-  function http(options) {
-    this._opts = options || {};
-  }
-
-  http.prototype.get = function(url) {
-    const opts = $.extend(true, {}, this._opts);
-    opts.method = 'GET';
-    return fetch(url, opts);
-  }
-
-  http.prototype.getJson = function(url) {
-    const adjustedUrl = url.substring(url.length - 5) === '.json' ? url : url + '.json';
-    return this.get(adjustedUrl).then(r => {
-      if (r.ok) { 
-        return r.json();
-      } else { 
-	throw new Error(`Bad response ${r.status}`);
-      }
-    });
-  }
-
-  return http;
-
-}]);
+"use strict";expose("http",["fetch",function(t){function n(t){this._opts=t||{}}return n.prototype.get=function(n){var e=$.extend(!0,{},this._opts);return e.method="GET",t(n,e)},n.prototype.getJson=function(t){var n=".json"===t.substring(t.length-5)?t:t+".json";return this.get(n).then(function(t){if(t.ok)return t.json();throw new Error("Bad response "+t.status)})},n}]);
+//# sourceMappingURL=http.js.map

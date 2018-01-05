@@ -15,5 +15,6 @@ const fileOptions = {
 
 app.get('/', (req, res) => res.sendFile('index.html', fileOptions));
 app.get('/catalogue', (req, res) => res.sendFile('search.html', fileOptions));
+app.get('/questionnaire/:id', (req, res) => res.sendFile('questionnaire.html', fileOptions));
 
 app.listen(port, () => console.log(`App listening on port ${port}`));

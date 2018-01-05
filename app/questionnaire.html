@@ -15,26 +15,20 @@
 				<div class="inner">
 					<h1>Impactasaurus Questionnaire Repository</h1>
 					<p>Find a questionnaire to demonstrate and improve your social impact</p>
-					<ul class="actions">
-						<li><a href="#get_started" class="button scrolly">Get started</a></li>
-					</ul>
 				</div>
 			</section>
 
-			<section id="get_started" class="main style1">
+			<section id="questionnaire" class="main style1">
 				<div class="container">
 					<div class="row 150%">
-						<div class="6u 12u$(medium)">
+						<div>
 							<header class="major">
-								<h2>Getting Started</h2>
+								<h2 id="title">Questionnaire</h2>
+                                <p id="subtitle" hidden></p>
+                                <div class="catalogue" id="detailTable" hidden></div>
 							</header>
-							<p>As you look to measure and demostrate your social impact, it is important to make sure that you are asking the right questions to show the right value. Using established questionnaires known for their accuracy increases your faith in the results, and your trustees, investors and donors faith in you.</p>
-							<!-- TODO: Flesh this out -->
-							<ul class="actions">
-								<li>
-									<a href="/catalogue" class="button">Find a questionnaire</a>
-								</li>
-							</ul>
+							<span id="spinner"><span class="fa fa-spinner fa-spin">&nbsp;</span>&nbsp;Loading...</span>
+                            <div class="catalogue" id="questionnaireTable" hidden></div>
 						</div>
 					</div>
 				</div>
@@ -46,6 +40,6 @@
 			<script src="/assets/js/util.js"></script>
 			<!--[if lte IE 8]><script src="/assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="/assets/js/main.js"></script>
-
+			<script src="/assets/js/questionnaire.js"></script>
 	</body>
 </html>

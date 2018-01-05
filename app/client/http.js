@@ -1,4 +1,6 @@
 expose('http', ['fetch', function(fetch) {
+  'use strict';
+
   function http(options) {
     this._opts = options || {};
   }
@@ -12,9 +14,9 @@ expose('http', ['fetch', function(fetch) {
   http.prototype.getJson = function(url) {
     const adjustedUrl = url.substring(url.length - 5) === '.json' ? url : url + '.json';
     return this.get(adjustedUrl).then(r => {
-      if (r.ok) { 
+      if (r.ok) {
         return r.json();
-      } else { 
+      } else {
 	throw new Error(`Bad response ${r.status}`);
       }
     });

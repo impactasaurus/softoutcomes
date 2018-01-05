@@ -1,4 +1,6 @@
 const injector = (function() {
+  'use strict';
+
   const deps = {};
 
   function resolve(constructor) {

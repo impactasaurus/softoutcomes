@@ -1,4 +1,5 @@
 expose('hiddenToggle', ['document', (function(document) {
+  'use strict';
 
   function hiddenToggle(id) {
     this._id = id;
