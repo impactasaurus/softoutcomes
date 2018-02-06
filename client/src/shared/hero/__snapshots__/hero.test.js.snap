@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Hero /> should match the snapshot 1`] = `
+.c2 {
+  font-family: "Source Sans Pro",Helvetica,sans-serif;
+  color: rgb(255,255,255);
+  line-height: 3.375rem;
+  font-size: 2.25rem;
+  font-weight: 300;
+  margin: 0;
+}
+
+.c3 {
+  font-family: "Source Sans Pro",Helvetica,sans-serif;
+  color: rgb(255,255,255);
+  line-height: 1.5rem;
+  font-size: 1rem;
+  font-weight: 300;
+  margin: 0;
+  margin-top: 1.125rem;
+}
+
+.c0 {
+  background-color: rgb(79,164,154);
+  background-image: url(overlay.png),url(overlay.svg),linear-gradient(45deg,rgb(157,198,107) 5%,rgb(79,164,154) 30%,rgb(67,97,194));
+  background-position: top left,center center,center center;
+  background-attachment: fixed,fixed,fixed;
+  background-size: auto,cover,cover;
+  background-repeat: no-repeat;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row nowrap;
+  -ms-flex-flow: row nowrap;
+  flex-flow: row nowrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  min-height: 24em;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: column nowrap;
+  -ms-flex-flow: column nowrap;
+  flex-flow: column nowrap;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+  opacity: 0;
+  -webkit-transition-delay: 0.25s;
+  transition-delay: 0.25s;
+  -webkit-transition: -webkit-transform 1.5s ease,opacity 2s ease;
+  -webkit-transition: transform 1.5s ease,opacity 2s ease;
+  transition: transform 1.5s ease,opacity 2s ease;
+}
+
+<section
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <h1
+      className="c2"
+    >
+      Impactasaurus Questionnaire Repository
+    </h1>
+    <p
+      className="c3"
+    >
+      Find a questionnaire to demonstrate and improve your social impact
+    </p>
+    <p>
+      Action!
+    </p>
+  </div>
+</section>
+`;

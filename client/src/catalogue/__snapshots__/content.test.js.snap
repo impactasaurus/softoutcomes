@@ -1,0 +1,243 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`catalogue <Content /> should render the table columns 1`] = `
+.c3 {
+  font-family: "Source Sans Pro",Helvetica,sans-serif;
+  color: rgb(153,153,153);
+  line-height: 3.375rem;
+  font-size: 2.25rem;
+  font-weight: 300;
+  margin: 0;
+}
+
+.c3::after {
+  content: '';
+  height: 1px;
+  display: block;
+  width: 8rem;
+  margin-top: 0.75rem;
+  border-bottom: 1px solid rgb(153,153,153);
+}
+
+.c11 {
+  color: rgb(153,153,153);
+  border-bottom: 1px dotted rgb(153,153,153);
+  text-decoration: none;
+  -webkit-transition: color 0.2s ease-in-out,border-color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out,border-color 0.2s ease-in-out;
+  font-family: "Source Sans Pro",Helvetica,sans-serif;
+  line-height: 1.5rem;
+  font-size: 1rem;
+}
+
+.c11:hover {
+  border-bottom-color: transparent;
+  color: rgb(157,198,107);
+}
+
+.c0 {
+  padding: 1.5rem 2.25rem;
+}
+
+.c5 {
+  border-bottom: 1px solid rgb(153,153,153);
+}
+
+.c7:nth-child(2n) {
+  background-color: rgba(157,198,107,0.075);
+}
+
+.c4 {
+  width: 100%;
+}
+
+.c6 {
+  color: rgb(153,153,153);
+  text-align: left;
+  padding: 0 0.75rem 0.75rem 0.75rem;
+  font-family: "Source Sans Pro",Helvetica,sans-serif;
+}
+
+.c8 {
+  padding: 0.75rem;
+}
+
+.c8 > * {
+  vertical-align: top;
+}
+
+.c10 {
+  padding: 0.75rem;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  padding-bottom: 1.5rem;
+}
+
+.c1 > * {
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+
+.c1::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.c2 {
+  width: 100%;
+}
+
+.c12 {
+  color: rgb(153,153,153);
+  font-family: "Source Sans Pro",Helvetica,sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.5rem;
+}
+
+.c9 {
+  width: 80px;
+}
+
+<section
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <div
+      className="c2"
+    >
+      <h1
+        className="c3"
+      >
+        Catalogue
+      </h1>
+    </div>
+  </div>
+  <div
+    className="c1"
+  >
+    <div
+      className="c2"
+    >
+      <table
+        className="c4"
+      >
+        <thead
+          className="c5"
+        >
+          <tr>
+            <th
+              className="c6"
+            />
+            <th
+              className="c6"
+            >
+              Name
+            </th>
+            <th
+              className="c6"
+            >
+              Description
+            </th>
+            <th
+              className="c6"
+            >
+              Number of questions
+            </th>
+            <th
+              className="c6"
+            >
+              Demographic
+            </th>
+            <th
+              className="c6"
+            >
+              Sectors
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          className=""
+        >
+          <tr
+            className="c7"
+          >
+            <td
+              className="c8"
+            >
+              <img
+                alt="Logo for The questionnaire"
+                className="c9"
+                src="/assets/logos/logo.png"
+              />
+            </td>
+            <td
+              className="c10"
+            >
+              <a
+                className="c11"
+                href="/questionnaire/questionnaire"
+                onClick={[Function]}
+              >
+                The questionnaire
+              </a>
+            </td>
+            <td
+              className="c10"
+            >
+              <p
+                className="c12"
+              >
+                questionnaire description
+              </p>
+            </td>
+            <td
+              className="c10"
+            >
+              <p
+                className="c12"
+              >
+                10
+              </p>
+            </td>
+            <td
+              className="c10"
+            >
+              <p
+                className="c12"
+              >
+                some, demographic
+              </p>
+            </td>
+            <td
+              className="c10"
+            >
+              <p
+                className="c12"
+              >
+                some, sectors
+              </p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+`;

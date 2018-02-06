@@ -1,46 +1,19 @@
 {
-  "name": "questionnaires",
-  "version": "1.0.0",
-  "description": "Questionnaire repository module for impactasaurus",
-  "main": "app/main.js",
+  "name": "questionnaire",
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
-    "start": "node app/main.js",
-    "build:client": "gulp build",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "vulnerability:check": "nsp check && snyk test",
-    "snyk:auth": "snyk auth",
-    "watch:client": "watch \"npm run build:client\" app/client/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/impactasaurus/questionnaires.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/impactasaurus/questionnaires/issues"
-  },
-  "homepage": "https://github.com/impactasaurus/questionnaires#readme",
-  "dependencies": {
-    "express": "^4.16.2"
+    "runProd": "cd client && yarn build && ncp ./build ../server/build && cd ../server && yarn runProd",
+    "start": "npm-run-all -p -r -l start:server start:client",
+    "start:server": "cd server && yarn start",
+    "start:client": "cd client && yarn start",
+    "postinstall": "cd server && yarn install && cd ../client && yarn install",
+    "test:client": "cd client && yarn test:once",
+    "test:server": "cd server && yarn test:once",
+    "test": "npm-run-all -s -l test:server test:client"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^7.0.0",
-    "gulp-clean": "^0.3.2",
-    "gulp-concat": "^2.6.1",
-    "gulp-sourcemaps": "^2.6.3",
-    "gulp-uglify": "^3.0.0",
-    "helmet": "^3.9.0",
-    "nsp": "^3.1.0",
-    "pump": "^2.0.0",
-    "snyk": "^1.63.0",
-    "uglify-es": "^3.3.4",
-    "watch": "^1.0.2"
-  },
-  "config": {
-    "port": 3000
+    "ncp": "^2.0.0",
+    "npm-run-all": "^4.1.2"
   }
 }
