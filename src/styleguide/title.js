@@ -4,7 +4,7 @@ import { Header } from '../shared';
 
 export default ({id, children}) => (
     <Element fullWidth borderless>
-        <a id={id} style={{fontSize: 0}}>{id}</a>
+        <div id={id} />
         <Header underline>{children}</Header>
     </Element>
 );
