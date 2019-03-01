@@ -1,7 +1,6 @@
 import React from 'react';
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from 'react-apollo';
 import { BrowserRouter, Switch, Route} from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import normalise from './shared/global';
@@ -10,14 +9,15 @@ import Homepage from './homepage';
 import Catalogue from './catalogue';
 import Questionnaire from './questionnaire';
 import Styleguide from './styleguide';
-import reducer from './reducer';
 normalise();
 
-const store = createStore(reducer, applyMiddleware(thunk));
+const client = new ApolloClient({
+    uri: process.env.REACT_APP_API_URI,
+});
 
 export default () => (
     <ThemeProvider theme={primaryTheme}>
-        <Provider store={store}>
+        <ApolloProvider client={client}>
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/" component={Homepage} />
@@ -26,6 +26,6 @@ export default () => (
                     {process.env.REACT_APP_STYLEGUIDE_ENABLED === 'true' && <Route path="/styleguide" component={Styleguide} />}
                 </Switch>
             </BrowserRouter>
-        </Provider>
+        </ApolloProvider>
     </ThemeProvider>
 );
