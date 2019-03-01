@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Column from './column';
+import Column from './Column';
 
 describe('<Column />', () => {
     it('should default to 100% width', () => {
@@ -25,7 +25,6 @@ describe('<Column />', () => {
                         [size]: span,
                     };
                     const component = renderer.create(<Column {...props} />).toJSON();
-                    
                     if (minScreenSize) {
                         expect(component).toHaveStyleRule('width', `${span / 12 * 100}%`, {
                             media: `only screen and (min-width:${minScreenSize}px)`,
