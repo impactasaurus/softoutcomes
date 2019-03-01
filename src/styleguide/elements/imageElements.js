@@ -7,7 +7,7 @@ export default ({id}) => (
     <Fragment>
         <Title id={id}>Image elements</Title>
         <Element center>
-            <Logo src="/assets/logos/mental_health.jpeg" alt="Mental health logo" />
+            <Logo src="https://via.placeholder.com/80.png?text=Logo" alt="Example logo" />
         </Element>
     </Fragment>
 );
