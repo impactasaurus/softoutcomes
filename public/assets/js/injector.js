@@ -1,2 +1,0 @@
-"use strict";var injector=function(){var e={};return{resolve:function r(t){if("function"===$.type(t))try{return new t}catch(e){return t}else{if("array"===$.type(t)&&"function"===$.type(t[t.length-1])){var n=t.slice(0,-1).map(r),i=t[t.length-1];return i.apply(i,n)}if("string"!==$.type(t))return t;var o=e[t];if(o)return r(o)}},expose:function(r,t){e[r]=t}}}(),resolve=injector.resolve,expose=injector.expose;
-//# sourceMappingURL=injector.js.map

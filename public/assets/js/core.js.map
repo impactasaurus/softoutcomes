@@ -1,1 +1,0 @@
-{"version":3,"sources":["core.js"],"names":["expose","document","window","fetch"],"mappings":"aAACA,OAAA,WAAWC,UACVD,OAAA,SAAAE,QAGAF,OAAO,QAASG","file":"core.js","sourcesContent":["(function() {\n  'use strict';\n  expose('document', document);\n  expose('window', window);\n  expose('fetch', fetch);\n})();\n"]}
