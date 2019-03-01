@@ -1,25 +1,19 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { Provider } from 'react-redux';
-import createStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
 import { StaticRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { primaryTheme } from '../shared/theme';
-import { Hero, Table, VerticalTable } from '../shared';
-import ConnectedContent, { Content } from './Content';
+import { Table } from '../shared';
+import Content from './Content';
 
 describe('questionnaire <Content />', () => {
     const render = (component, initialState) => {
-        const store = createStore([ thunk ])(initialState || {});
         return renderer.create(
-            <Provider store={store}>
-                <StaticRouter context={{}}>
-                    <ThemeProvider theme={primaryTheme}>
-                        {component}
-                    </ThemeProvider>
-                </StaticRouter>
-            </Provider>
+            <StaticRouter context={{}}>
+                <ThemeProvider theme={primaryTheme}>
+                    {component}
+                </ThemeProvider>
+            </StaticRouter>
         );
     };
 
@@ -27,50 +21,60 @@ describe('questionnaire <Content />', () => {
         id: '1',
         name: 'Questionniare name',
         description: 'Questionnaire description',
-        pdfLink: 'questionnaire.link',
-        sectors: ['some', 'sectors'],
-        demographic: ['some', 'demographic'],
-        scoring: {
-            aggregation: 'sum',
-            bands: [
-                { minimum: 1, maximum: 5, label: 'Low risk' },
-                { minimum: 6, maximum: 10, label: 'Medium risk' },
-                { minimum: 11, maximum: 20, label: 'High risk' },
-            ],
-        },
+        scorings: [
+            {
+                id: 'Scoring 1',
+                name: 'Clinical score',
+                description: 'Total clinical score',
+                aggregation: 'mean',
+                questions: ['q1', 'q3'],
+            }
+        ],
         questions: [
             {
-                id: '1',
-                text: 'Question text',
-                left: {
-                    label: 'Strongly disagree',
-                    score: 1,
-                },
-                right: {
-                    label: 'Strongly agree',
-                    score: 5,
-                },
-                categories: ['some', 'categories'],
+                __typename: 'LikertQuestion',
+                id: 'q1',
+                text: 'Question 1 text',
+                description: 'Question 1 desc',
+                scale: [
+                    { label: 'Not at all', value: 0 },
+                    { label: 'Completely', value: 10 },
+                ]
+            },
+            {
+                __typename: 'LikertQuestion',
+                id: 'q2',
+                text: 'Question 2 text',
+                description: 'Question 2 desc',
+                scale: [
+                    { label: 'Not at all', value: 0 },
+                    { label: 'Completely', value: 10 },
+                ]
+            },
+            {
+                __typename: 'LikertQuestion',
+                id: 'q3',
+                text: 'Question 3 text',
+                description: 'Question 3 desc',
+                scale: [
+                    { label: 'Not at all', value: 0 },
+                    { label: 'Completely', value: 10 },
+                ]
             },
         ],
     };
 
-    it('should load the questionnaire from the api', () => {
-        const loadQuestionnaireSpy = jest.fn();
-        render(<Content loadQuestionnaire={loadQuestionnaireSpy} />);
-        expect(loadQuestionnaireSpy).toHaveBeenCalled();
-    });
 
     it('should pass the data to the tables', () => {
-        const component = render(<Content loadQuestionnaire={jest.fn()} data={data} />).root;
-        const summaryTable = component.findByType(VerticalTable);
-        expect(summaryTable.props.data).toEqual([data]);
-        const mainTable = component.findByType(Table);
-        expect(mainTable.props.data).toEqual(data.questions);
+        const component = render(<Content data={data} />).root;
+        const tables = component.findAllByType(Table);
+        expect(tables).toHaveLength(2);
+        expect(tables[0].props.data).toEqual(data.scorings);
+        expect(tables[1].props.data).toEqual(data.questions);
     });
 
     it('should match the snapshot', () => {
-        const component = render(<Content loadQuestionnaire={jest.fn()} data={data} />);
+        const component = render(<Content data={data} />);
         expect(component.toJSON()).toMatchSnapshot();
     });
 });

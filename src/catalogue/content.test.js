@@ -1,102 +1,107 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { Provider } from 'react-redux';
-import createStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
+import { MockedProvider } from 'react-apollo/test-utils';
+import wait from 'waait';
 import { ThemeProvider } from 'styled-components';
 import { StaticRouter } from 'react-router-dom';
-import fetchMock from 'fetch-mock';
-import ConnectedContent, { Content } from './Content';
-import { requestCatalogue, receiveCatalogue } from './actions';
+import Content, { questionnaireListQuery } from './Content';
 import { primaryTheme } from '../shared/theme';
-import { Table, TableHeader } from '../shared';
+import { Table } from '../shared';
+
+const mockQuestionnaires = [
+    {
+        id: 'questionnaire1',
+        name: 'Questionnaire 1 name',
+        version: '1.0.0',
+        description: 'Questionnaire 1 desc',
+        license: 'Questionnaire 1 license',
+        attribution: 'Questionnaire 1 attribution',
+        questions: [
+            { id: 'q1-1' },
+            { id: 'q1-2' },
+            { id: 'q1-3' },
+        ],
+    },
+    {
+        id: 'questionnaire2',
+        name: 'Questionnaire 2 name',
+        version: '1.0.0',
+        description: 'Questionnaire 2 desc',
+        license: 'Questionnaire 2 license',
+        attribution: 'Questionnaire 2 attribution',
+        questions: [
+            { id: 'q2-1' },
+            { id: 'q2-2' },
+        ],
+    }
+];
 
 describe('catalogue <Content />', () => {
-    const render = (component, initialState) => {
-        const store = createStore([ thunk ])(initialState || {});
+    const render = (component, mockedResponses) => {
         return renderer.create(
-            <Provider store={store}>
+            <MockedProvider mocks={mockedResponses} addTypename={false}>
                 <StaticRouter context={{}}>
                     <ThemeProvider theme={primaryTheme}>
                         {component}
                     </ThemeProvider>
                 </StaticRouter>
-            </Provider>
+            </MockedProvider>
         );
     };
 
-    it('should load the catalogue on mount', () => {
-        const catalogueSpy = jest.fn();
-        render(<Content loadCatalogue={catalogueSpy} />);
-        expect(catalogueSpy).toHaveBeenCalled();
+    it('should not render the table whilst the data is loading', () => {
+        const component = render(<Content />, []).root;
+        const tables = component.findAllByType(Table);
+        expect(tables).toHaveLength(0);
     });
 
-    it('should pass the given data to the table', () => {
-        const data = [
-            { some: 'data', id: '1' },
-        ];
-        const component = render(<Content loadCatalogue={jest.fn()} data={data} />);
-        const table = component.root.findByType(Table);
-        expect(table.props.data).toEqual(data);
-    });
-
-    it('should render the table columns', () => {
-        const data = [
-            {
-                id: 1,
-                logo: 'logo.png',
-                key: 'questionnaire',
-                name: 'The questionnaire',
-                description: 'questionnaire description',
-                length: 10,
-                demographic: ['some', 'demographic'],
-                sectors: ['some', 'sectors'],
+    it('should not render the table if there is an error loading the data', async () => {
+        const responses = [{
+            request: {
+                query: questionnaireListQuery,
             },
-        ];
-        const component = render(<Content loadCatalogue={jest.fn()} data={data} />);
+            error: new Error('Forced error'),
+        }];
+        const component = render(<Content />, responses).root;
+        await wait(0);
+        const tables = component.findAllByType(Table);
+        expect(tables).toHaveLength(0);
+    });
+
+    it('should render the list of questionnaires loaded from the api', async () => {
+        const responses = [{
+            request: {
+                query: questionnaireListQuery,
+            },
+            result: {
+                data: {
+                    questionnaires: {
+                        questionnaires: mockQuestionnaires,
+                    },
+                },
+            },
+        }];
+        const component = render(<Content />, responses).root;
+        await wait(0);
+        const table = component.findByType(Table);
+        expect(table.props.data).toEqual(mockQuestionnaires);
+    });
+
+    it('should render all the columns', async () => {
+        const responses = [{
+            request: {
+                query: questionnaireListQuery,
+            },
+            result: {
+                data: {
+                    questionnaires: {
+                        questionnaires: mockQuestionnaires,
+                    },
+                },
+            },
+        }];
+        const component = render(<Content />, responses);
+        await wait(0);
         expect(component.toJSON()).toMatchSnapshot();
-    });
-});
-
-describe('catalogue <ConnectedContent />', () => {
-    beforeEach(fetchMock.restore);
-
-    const render = (component, store) => renderer.create(
-        <Provider store={store}>
-            <StaticRouter context={{}}>
-                <ThemeProvider theme={primaryTheme}>
-                    {component}
-                </ThemeProvider>
-            </StaticRouter>
-        </Provider>
-    );
-
-    it('should dispatch the load catalogue action creator', async () => {
-        const endpoint = '/api/catalogue.json';
-        fetchMock.get(endpoint, { status: 200, body: [{ some: 'catalogue' }] });
-        const store = createStore([ thunk ])({});
-        
-        render(<ConnectedContent />, store);
-        await fetchMock.flush();
-
-        expect(store.getActions()).toEqual([
-            requestCatalogue(),
-            receiveCatalogue([{ some: 'catalogue' }]),
-        ]);
-        expect(fetchMock.called(endpoint)).toBeTruthy();
-    });
-
-    it('should load the data from the catalogue', async () => {
-        const endpoint = '/api/catalogue.json';
-        fetchMock.get(endpoint, { status: 404 });
-        const data = { id: '1', some: 'catalogue' };
-        const store = createStore([ thunk ])({
-            catalogue: [{ ...data }],
-        });
-        
-        const component = render(<ConnectedContent />, store).root;
-        await fetchMock.flush();
-        
-        expect(component.findByType(Content).props.data).toEqual([{ ...data }]);
     });
 });

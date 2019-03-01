@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Hero, Row, Column } from '../shared';
 import Content from './Content';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
-const loadQuestionnaire = gql`
+export const loadQuestionnaireQuery = gql`
 query Questionnaire($id: String!) {
     questionnaire(id: $id) {
         id
@@ -15,7 +15,6 @@ query Questionnaire($id: String!) {
             id
             question
             description
-            short
             ... on LikertQuestion {
                 scale {
                     value
@@ -35,14 +34,14 @@ query Questionnaire($id: String!) {
 
 export default ({ match: { params: { questionnaireId: id } } }) => {
     return (
-        <Fragment>
+        <>
             <Row>
                 <Column>
                     <Hero />
                 </Column>
             </Row>
             <Row>
-                <Query query={loadQuestionnaire} variables={{ id }}>
+                <Query query={loadQuestionnaireQuery} variables={{ id }}>
                     {({loading, error, data}) => {
                         if (loading || error) {
                             return null;
@@ -54,6 +53,6 @@ export default ({ match: { params: { questionnaireId: id } } }) => {
                     }}
                 </Query>
             </Row>
-        </Fragment>
+        </>
     );
 }

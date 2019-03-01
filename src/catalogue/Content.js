@@ -6,7 +6,7 @@ import { TableHeader, TableBody } from '../shared/table';
 
 // TODO: We are loading the whole list of questions here just to know the
 // number of questions
-const questionnaireListQuery = gql`
+export const questionnaireListQuery = gql`
 {
     questionnaires(page: 0) {
         questionnaires {

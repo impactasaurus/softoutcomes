@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`catalogue <Content /> should render the table columns 1`] = `
+exports[`catalogue <Content /> should render all the columns 1`] = `
 .c3 {
   font-family: "Source Sans Pro",Helvetica,sans-serif;
   color: rgb(153,153,153);
@@ -19,7 +19,7 @@ exports[`catalogue <Content /> should render the table columns 1`] = `
   border-bottom: 1px solid rgb(153,153,153);
 }
 
-.c11 {
+.c9 {
   color: rgb(153,153,153);
   border-bottom: 1px dotted rgb(153,153,153);
   text-decoration: none;
@@ -30,7 +30,7 @@ exports[`catalogue <Content /> should render the table columns 1`] = `
   font-size: 1rem;
 }
 
-.c11:hover {
+.c9:hover {
   border-bottom-color: transparent;
   color: rgb(157,198,107);
 }
@@ -59,14 +59,6 @@ exports[`catalogue <Content /> should render the table columns 1`] = `
 }
 
 .c8 {
-  padding: 0.75rem;
-}
-
-.c8 > * {
-  vertical-align: top;
-}
-
-.c10 {
   padding: 0.75rem;
 }
 
@@ -101,16 +93,12 @@ exports[`catalogue <Content /> should render the table columns 1`] = `
   width: 100%;
 }
 
-.c12 {
+.c10 {
   color: rgb(153,153,153);
   font-family: "Source Sans Pro",Helvetica,sans-serif;
   font-size: 1rem;
   font-weight: 300;
   line-height: 1.5rem;
-}
-
-.c9 {
-  width: 80px;
 }
 
 <section
@@ -144,11 +132,13 @@ exports[`catalogue <Content /> should render the table columns 1`] = `
           <tr>
             <th
               className="c6"
-            />
+            >
+              Name
+            </th>
             <th
               className="c6"
             >
-              Name
+              Version
             </th>
             <th
               className="c6"
@@ -158,17 +148,17 @@ exports[`catalogue <Content /> should render the table columns 1`] = `
             <th
               className="c6"
             >
+              License
+            </th>
+            <th
+              className="c6"
+            >
+              Attribution
+            </th>
+            <th
+              className="c6"
+            >
               Number of questions
-            </th>
-            <th
-              className="c6"
-            >
-              Demographic
-            </th>
-            <th
-              className="c6"
-            >
-              Sectors
             </th>
           </tr>
         </thead>
@@ -181,57 +171,117 @@ exports[`catalogue <Content /> should render the table columns 1`] = `
             <td
               className="c8"
             >
-              <img
-                alt="Logo for The questionnaire"
-                className="c9"
-                src="/assets/logos/logo.png"
-              />
-            </td>
-            <td
-              className="c10"
-            >
               <a
-                className="c11"
-                href="/questionnaire/questionnaire"
+                className="c9"
+                href="/questionnaire/questionnaire1"
                 onClick={[Function]}
               >
-                The questionnaire
+                Questionnaire 1 name
               </a>
             </td>
             <td
-              className="c10"
+              className="c8"
             >
               <p
-                className="c12"
+                className="c10"
               >
-                questionnaire description
+                1.0.0
               </p>
             </td>
             <td
-              className="c10"
+              className="c8"
             >
               <p
-                className="c12"
+                className="c10"
               >
-                10
+                Questionnaire 1 desc
               </p>
             </td>
             <td
-              className="c10"
+              className="c8"
             >
               <p
-                className="c12"
+                className="c10"
               >
-                some, demographic
+                Questionnaire 1 license
               </p>
             </td>
             <td
-              className="c10"
+              className="c8"
             >
               <p
-                className="c12"
+                className="c10"
               >
-                some, sectors
+                Questionnaire 1 attribution
+              </p>
+            </td>
+            <td
+              className="c8"
+            >
+              <p
+                className="c10"
+              >
+                3
+              </p>
+            </td>
+          </tr>
+          <tr
+            className="c7"
+          >
+            <td
+              className="c8"
+            >
+              <a
+                className="c9"
+                href="/questionnaire/questionnaire2"
+                onClick={[Function]}
+              >
+                Questionnaire 2 name
+              </a>
+            </td>
+            <td
+              className="c8"
+            >
+              <p
+                className="c10"
+              >
+                1.0.0
+              </p>
+            </td>
+            <td
+              className="c8"
+            >
+              <p
+                className="c10"
+              >
+                Questionnaire 2 desc
+              </p>
+            </td>
+            <td
+              className="c8"
+            >
+              <p
+                className="c10"
+              >
+                Questionnaire 2 license
+              </p>
+            </td>
+            <td
+              className="c8"
+            >
+              <p
+                className="c10"
+              >
+                Questionnaire 2 attribution
+              </p>
+            </td>
+            <td
+              className="c8"
+            >
+              <p
+                className="c10"
+              >
+                2
               </p>
             </td>
           </tr>
