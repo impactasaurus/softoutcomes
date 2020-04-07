@@ -1,4 +1,5 @@
-const path = require(`path`)
+const path = require('path'),
+  url = require('./src/helpers/url');
 
 exports.createPages = async ({ actions, graphql }) => {
   const questionnaires = [];
@@ -11,6 +12,7 @@ exports.createPages = async ({ actions, graphql }) => {
           questionnaires(page:${page}, limit:${limit}) {
             questionnaires {
               id
+              name
             }
           }
         }
@@ -24,9 +26,9 @@ exports.createPages = async ({ actions, graphql }) => {
     page++;
   }
   const numPages = page + 1;
-  questionnaires.forEach(({ id }) => {
+  questionnaires.forEach(({ id, name }) => {
     actions.createPage({
-      path: `questionnaires/${id}`,
+      path: `questionnaires/${url.slugify(name)}`,
       component: path.resolve(`./src/templates/questionnaire.js`),
       context: {
         id,

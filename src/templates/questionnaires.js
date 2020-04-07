@@ -4,6 +4,7 @@ import { Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Paging from "../components/paging"
+import {slugify} from '../helpers/url'
 
 
 
@@ -16,7 +17,7 @@ const Questionnaires = (props) => {
         <div>Page {props.pageContext.page+1}, limit {props.pageContext.limit}</div>
         {questionnaires.map(q => (
           <div key={q.id}>
-            <Link to={`/questionnaires/${q.id}`}>questionnaire - {q.id} - {q.name}</Link>
+            <Link to={`/questionnaires/${slugify(q.name)}`}>questionnaire - {q.id} - {q.name}</Link>
           </div>
         ))}
       </div>
