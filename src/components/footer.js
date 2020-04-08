@@ -11,7 +11,7 @@ const Footer = () => {
   `);
   return (
     <footer>
-      © {new Date().getFullYear()}, built on {buildDate.currentBuildDate.currentDate}
+      © {new Date().getFullYear()} Impactasaurus - built on {buildDate.currentBuildDate.currentDate}
     </footer>
   );
 }

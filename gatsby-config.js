@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `Soft outcomes`,
     description: `A catalogue of questionnaires suited to capturing soft outcomes`,
-    author: `impactasaurus`,
+    author: `@impactasaurus`,
     siteUrl: "https://softoutcomes.org"
   },
   plugins: [

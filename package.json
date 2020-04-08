@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "softoutcomes.org",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "A catalogue of questionnaires suited to capturing soft outcomes",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Impactasaurus",
   "dependencies": {
     "gatsby": "^2.19.45",
     "gatsby-image": "^2.2.44",
@@ -26,9 +26,6 @@
   "devDependencies": {
     "prettier": "^1.19.1"
   },
-  "keywords": [
-    "gatsby"
-  ],
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
@@ -41,9 +38,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/impactasaurus/softoutcomes"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/impactasaurus/softoutcomes/issues"
   }
 }
