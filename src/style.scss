@@ -1,1 +1,49 @@
+$primary:  #fed539;
+$secondary: #383838;
+$dark: #212121;
+
+$font-family-sans-serif: Roboto,sans-serif;
+$font-family-monospace: "Roboto Mono", "Courier New", monospace;
+$body-color: #424242;
+
+$link-color: $body-color;
+main a, footer a {
+  text-decoration: underline;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 80%;
+  padding-bottom: 3px;
+  display: inline-flex;
+  vertical-align: middle;
+}
+
+$h1-font-size: 4rem;
+h1 {
+  margin-bottom: 1.5rem;
+}
+$font-size-lg: 2rem;
+$headings-font-weight: 400;
+$headings-color: $dark;
+
+$navbar-dark-active-color: white;
+$navbar-dark-hover-color: white;
+$navbar-dark-color: #9e9e9e;
+$navbar-brand-font-size: 1.25rem;
+$navbar-toggler-font-size: 2rem;
+
+$jumbotron-padding: 6rem;
+$jumbotron-color: $secondary;
+$jumbotron-bg: $primary;
+
+$enable-rounded: false;
+
+.dark {
+  h1, h2, h3, h4, h5, h6 {
+    color: white;
+  }
+  p {
+    color: darken(white, 5);
+  }
+}
+
 @import "~bootstrap/scss/bootstrap";

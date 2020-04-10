@@ -8,11 +8,11 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: 'gatsby-source-filesystem',
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
-      },
+        name: 'images',
+        path: `${__dirname}/static/images`
+      }
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
@@ -25,7 +25,7 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `static/images/logo-filled.svg`, // This path is relative to the root of the site.
       },
     },
     {
@@ -44,6 +44,16 @@ module.exports = {
       options: {
         formatAsDateString: false,
       },
+    },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          'Roboto\:300,400,500,700,400italic',
+          'Roboto Mono\:400,500'
+        ],
+        display: 'swap'
+      }
     },
     `gatsby-plugin-offline`,
     'gatsby-plugin-robots-txt',
