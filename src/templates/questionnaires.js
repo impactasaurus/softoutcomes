@@ -1,10 +1,10 @@
 import PropTypes from "prop-types"
 import React from "react"
-import { Link } from "gatsby"
+import { graphql } from 'gatsby'
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Paging from "../components/paging"
-import {slugify} from '../helpers/url'
+import QuestionnaireList from "../components/questionnaire-list"
 
 
 
@@ -13,15 +13,13 @@ const Questionnaires = (props) => {
   return (
     <Layout>
       <SEO title="Questionnaires"/>
-      <div>
-        <div>Page {props.pageContext.page+1}, limit {props.pageContext.limit}</div>
-        {questionnaires.map(q => (
-          <div key={q.id}>
-            <Link to={`/questionnaires/${slugify(q.name)}`}>questionnaire - {q.id} - {q.name}</Link>
-          </div>
-        ))}
-      </div>
-      <Paging numPages={props.pageContext.numPages} id="questionnaire-pages" urlGenerator={pg => `questionnaires/${pg}`}/>
+      <QuestionnaireList questionnaires={questionnaires}/>
+      <Paging
+        id="questionnaire-pages"
+        numPages={props.pageContext.numPages}
+        urlGenerator={pg => `questionnaires/${pg}`}
+        currentPage={props.pageContext.page}
+      />
     </Layout>
   );
 }
@@ -38,7 +36,8 @@ Questionnaires.propTypes = {
         questionnaires: PropTypes.arrayOf(
           PropTypes.exact({
             id: PropTypes.string.isRequired,
-            name: PropTypes.string.isRequired
+            name: PropTypes.string.isRequired,
+            description: PropTypes.string.isRequired
           })
         )
       })
@@ -55,6 +54,7 @@ export const pageQuery = graphql`
         questionnaires {
           id
           name
+          description
         }
       }
     }

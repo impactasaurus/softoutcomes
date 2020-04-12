@@ -8,8 +8,8 @@ const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
     <Hero>
-      <h1>Don't reinvent the wheel</h1>
-      <h2>Be inspired by scientifically validated questionnaires</h2>
+      <h1>Avoid reinventing the wheel</h1>
+      <h2>Take inspiration from scientifically validated questionnaires</h2>
       <p>
         Our catalogue collects scientifically validated questionnaires for measuring change inside people
       </p>
@@ -38,8 +38,24 @@ const IndexPage = () => (
     <Hero white={true}>
       <h2>About</h2>
       <p>
-        Stuff
+        This catalogue of questionnaires was originally pulled together for use in <a href="https://impactasaurus.org/">Impactasaurus</a>, a tool for monitoring and reporting on soft outcomes.
+        We believe that using validated questionnaires will bring great benefit to the charity sector.
+        As such, we wanted to make this catalogue of questionnaires freely available outside of Impactasaurus.
       </p>
+      <p>
+        Given our push for standardisation, we would love more impact tools to make use of this catalogue.
+        We offer a free to use GraphQL API which any tool can make use of.
+        For more details please <a href="mailto:support@impactasaurus.org">email us</a>.
+      </p>
+      <p>
+        If we are missing a questionnaire, please <a href="mailto:support@impactasaurus.org">let us know</a>.
+        To be eligible the questionnaire must be:
+      </p>
+      <ul>
+        <li>freely available for non profit use</li>
+        <li>allow us to reproduce the questionnaire on this website</li>
+        <li>validated within the literature</li>
+      </ul>
     </Hero>
   </Layout>
 )

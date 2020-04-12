@@ -58,6 +58,7 @@ module.exports = {
     `gatsby-plugin-offline`,
     'gatsby-plugin-robots-txt',
     `gatsby-plugin-sitemap`,
-    `gatsby-plugin-sass`
+    `gatsby-plugin-sass`,
+    `gatsby-plugin-typescript`
   ],
 }
