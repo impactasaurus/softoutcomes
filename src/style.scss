@@ -6,7 +6,11 @@ $font-family-sans-serif: Roboto,sans-serif;
 $font-family-monospace: "Roboto Mono", "Courier New", monospace;
 $body-color: #424242;
 
-$link-color: $body-color;
+$link-color: $dark;
+main a, footer a {
+  text-decoration: underline;
+}
+/*
 main a, footer a {
   text-decoration: underline;
   text-transform: uppercase;
@@ -16,6 +20,7 @@ main a, footer a {
   display: inline-flex;
   vertical-align: middle;
 }
+ */
 
 $h1-font-size: 4rem;
 h1 {
@@ -34,6 +39,10 @@ $navbar-toggler-font-size: 2rem;
 $jumbotron-padding: 6rem;
 $jumbotron-color: $secondary;
 $jumbotron-bg: $primary;
+.hero.jumbotron.mini {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
 
 $enable-rounded: false;
 

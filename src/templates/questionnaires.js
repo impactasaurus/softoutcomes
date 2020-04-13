@@ -1,6 +1,7 @@
 import PropTypes from "prop-types"
 import React from "react"
 import { graphql } from 'gatsby'
+import Container from 'react-bootstrap/Container';
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Paging from "../components/paging"
@@ -13,13 +14,21 @@ const Questionnaires = (props) => {
   return (
     <Layout>
       <SEO title="Questionnaires"/>
-      <QuestionnaireList questionnaires={questionnaires}/>
-      <Paging
-        id="questionnaire-pages"
-        numPages={props.pageContext.numPages}
-        urlGenerator={pg => `questionnaires/${pg}`}
-        currentPage={props.pageContext.page}
-      />
+      <Container>
+        <QuestionnaireList
+          questionnaires={questionnaires}
+          style={{
+            marginTop: "2rem",
+            marginBottom: "0.5rem"
+          }}
+        />
+        <Paging
+          id="questionnaire-pages"
+          numPages={props.pageContext.numPages}
+          urlGenerator={pg => `questionnaires/${pg}`}
+          currentPage={props.pageContext.page}
+        />
+      </Container>
     </Layout>
   );
 }

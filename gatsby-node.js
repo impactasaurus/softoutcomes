@@ -3,7 +3,7 @@ const path = require('path'),
 
 exports.createPages = async ({ actions, graphql }) => {
   const questionnaires = [];
-  const limit = 10;
+  let limit = 10;
   let page = 0;
   while (true) {
     const { data } = await graphql(`
@@ -14,22 +14,29 @@ exports.createPages = async ({ actions, graphql }) => {
               id
               name
             }
+            pageInfo {
+              hasNextPage
+              limit
+            }
           }
         }
       }
     `);
-    const newQuestionnaires = data.softoutcomes.questionnaires.questionnaires;
+    const response = data.softoutcomes.questionnaires;
+    const newQuestionnaires = response.questionnaires;
     questionnaires.push(...newQuestionnaires);
-    if (newQuestionnaires.length !== limit) {
+    if (!response.pageInfo.hasNextPage) {
       break;
     }
+    // the server may not allow the limit we provided - so use the limit in the response
+    limit = response.pageInfo.limit;
     page++;
   }
   const numPages = page + 1;
   questionnaires.forEach(({ id, name }) => {
     actions.createPage({
       path: `questionnaires/${url.slugify(name)}`,
-      component: path.resolve(`./src/templates/questionnaire.js`),
+      component: path.resolve(`./src/templates/questionnaire.tsx`),
       context: {
         id,
       },
