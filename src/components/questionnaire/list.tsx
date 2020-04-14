@@ -1,6 +1,6 @@
 import { Link } from "gatsby"
 import React, { CSSProperties } from "react"
-import {slugify} from '../helpers/url'
+import {slugify} from '../../helpers/url'
 import ListGroup from 'react-bootstrap/ListGroup';
 
 interface IQuestionnaire {
@@ -14,7 +14,7 @@ interface IProps {
   style?: CSSProperties;
 }
 
-const QuestionnaireList = (p: IProps) => {
+const List = (p: IProps) => {
   const entries: JSX.Element[] = p.questionnaires.map(q => (
     <ListGroup.Item key={q.id}>
       <Link to={`/questionnaires/${slugify(q.name)}`}><h5>{q.name}</h5></Link>
@@ -28,4 +28,4 @@ const QuestionnaireList = (p: IProps) => {
   );
 }
 
-export default QuestionnaireList
+export default List

@@ -1,5 +1,5 @@
 import React from "react"
-import Section from "./section"
+import Section from "../section"
 
 export interface ILink {
   name: string;
@@ -11,7 +11,7 @@ interface IProps {
   links: ILink[];
 }
 
-const QuestionnaireLinks = (p: IProps) => {
+const Links = (p: IProps) => {
   const links: JSX.Element[] = p.links.map((l) => (
     <div key={l.name}>
       <a target="_blank" href={l.url}>{l.name}</a>
@@ -26,4 +26,4 @@ const QuestionnaireLinks = (p: IProps) => {
   );
 }
 
-export default QuestionnaireLinks
+export default Links

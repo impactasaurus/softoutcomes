@@ -1,12 +1,12 @@
 import React from "react"
-import Section from "./section"
+import Section from "../section"
 
 interface IProps {
   attribution?: string;
   license: string;
 }
 
-const QuestionnaireLegal = (p: IProps) => {
+const Legal = (p: IProps) => {
   return (
     <Section header="Legal" body={
       <>
@@ -23,4 +23,4 @@ const QuestionnaireLegal = (p: IProps) => {
   );
 }
 
-export default QuestionnaireLegal
+export default Legal

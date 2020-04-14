@@ -4,8 +4,12 @@ import Container from 'react-bootstrap/Container';
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Hero from '../components/hero'
-import QuestionnaireLinks, { ILink } from "../components/questionnaire-links"
-import QuestionnaireLegal from "../components/questionnaire-legal"
+import Links, { ILink } from "../components/questionnaire/links"
+import Legal from "../components/questionnaire/legal"
+import Questions, { IQuestion } from "../components/questionnaire/questions"
+import Scores, { IScore } from "../components/questionnaire/scorings"
+import Col from "react-bootstrap/Col"
+import Row from "react-bootstrap/Row"
 
 interface IProps {
   pageContext: {
@@ -20,6 +24,9 @@ interface IProps {
         links: ILink[];
         attribution?: string;
         license: string;
+        instructions?: string;
+        questions: IQuestion[];
+        scorings?: IScore[];
       }
     }
   }
@@ -34,12 +41,20 @@ const Questionnaire = (props: IProps) => {
         <h2>{questionnaire.name}</h2>
         <p>{questionnaire.description}</p>
       </Hero>
-      <Container style={{
+      <Container fluid style={{
         marginTop: "1rem",
         marginBottom: "1rem"
       }}>
-        <QuestionnaireLinks links={questionnaire.links} />
-        <QuestionnaireLegal license={questionnaire.license} attribution={questionnaire.attribution} />
+        <Row>
+          <Col xl={3} lg={{span: 4, order: 0}} md={{span: 12, order: 2}}>
+            <Links links={questionnaire.links} />
+            <Legal license={questionnaire.license} attribution={questionnaire.attribution} />
+          </Col>
+          <Col>
+            <Questions questions={questionnaire.questions} instructions={questionnaire.instructions} />
+            <Scores scores={questionnaire.scorings} />
+          </Col>
+        </Row>
       </Container>
     </Layout>
   );
@@ -56,10 +71,17 @@ export const pageQuery = graphql`
         description
         license
         attribution
+        instructions
         links {
           name
           url
           description
+        }
+        questions {
+          question
+        }
+        scorings {
+          name 
         }
       }
     }

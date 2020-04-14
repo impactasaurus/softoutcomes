@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Paging from "../components/paging"
-import QuestionnaireList from "../components/questionnaire-list"
+import List from "../components/questionnaire/list"
 
 
 
@@ -15,7 +15,7 @@ const Questionnaires = (props) => {
     <Layout>
       <SEO title="Questionnaires"/>
       <Container>
-        <QuestionnaireList
+        <List
           questionnaires={questionnaires}
           style={{
             marginTop: "2rem",
