@@ -16,7 +16,7 @@ const Footer = () => {
   `);
   const bgColor = "#f1f3f4";
   return (
-    <footer style={{paddingBottom: "2rem", backgroundColor: bgColor}}>
+    <footer className="footer" style={{paddingBottom: "2rem", backgroundColor: bgColor}}>
       <Container>
         <Row >
           <Col>

@@ -12,7 +12,7 @@ import List from "../components/questionnaire/list"
 const Questionnaires = (props) => {
   const questionnaires = props.data.softoutcomes.questionnaires.questionnaires;
   return (
-    <Layout>
+    <Layout footerMargin={true}>
       <SEO title="Questionnaires"/>
       <Container>
         <List

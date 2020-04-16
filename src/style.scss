@@ -46,6 +46,8 @@ $jumbotron-bg: $primary;
 
 $enable-rounded: false;
 
+$pagination-active-color: $dark;
+
 .dark {
   h1, h2, h3, h4, h5, h6 {
     color: white;
@@ -53,6 +55,16 @@ $enable-rounded: false;
   p {
     color: darken(white, 5);
   }
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.app-content {
+  flex-grow: 1;
 }
 
 @import "~bootstrap/scss/bootstrap";

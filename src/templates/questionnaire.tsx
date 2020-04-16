@@ -35,7 +35,7 @@ interface IProps {
 const Questionnaire = (props: IProps) => {
   const questionnaire = props.data.softoutcomes.questionnaire;
   return (
-    <Layout>
+    <Layout footerMargin={true}>
       <SEO title={questionnaire.name}/>
       <Hero mini={true}>
         <h2>{questionnaire.name}</h2>
