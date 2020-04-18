@@ -4,7 +4,7 @@ node_js:
 cache: npm
 install: npm ci
 script: npm test && npm run build
-before_deploy: npm run build && sudo pip install s3cmd awscli
+before_deploy: sudo pip install s3cmd awscli
 deploy:
   skip_cleanup: true
   provider: script
