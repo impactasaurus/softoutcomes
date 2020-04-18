@@ -1,17 +1,17 @@
 language: node_js
 node_js:
   - "node"
-cache: yarn
-install: yarn install
-script: yarn test:once
-before_deploy: yarn build && sudo pip install s3cmd awscli
+cache: npm
+install: npm ci
+script: npm test
+before_deploy: npm run build && sudo pip install s3cmd awscli
 deploy:
   skip_cleanup: true
   provider: script
-  script: s3cmd sync --delete-removed --no-mime-magic --guess-mime-type -P -M -r build/ $S3_BUCKET && aws configure set preview.cloudfront true && aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
+  script: s3cmd sync --delete-removed --no-mime-magic --guess-mime-type -P -M -r public/ $S3_BUCKET && aws configure set preview.cloudfront true && aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
   on:
     repo: impactasaurus/softoutcomes
     branch: master
 notifications:
-    email:
-        on_failure: always
+  email:
+    on_failure: always
