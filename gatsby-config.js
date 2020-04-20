@@ -55,6 +55,18 @@ module.exports = {
         display: 'swap'
       }
     },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "UA-61133305-6",
+        // Puts tracking script in the head instead of the body
+        head: false,
+        // Setting this parameter is optional
+        anonymize: true,
+        // Setting this parameter is also optional
+        respectDNT: true
+      },
+    },
     `gatsby-plugin-offline`,
     'gatsby-plugin-robots-txt',
     `gatsby-plugin-sitemap`,
