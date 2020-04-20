@@ -19,11 +19,11 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Soft Outcomes`,
+        short_name: `outcomes`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#f1f3f4`,
+        theme_color: `#424242`,
         display: `minimal-ui`,
         icon: `static/images/logo-filled.svg`, // This path is relative to the root of the site.
       },
