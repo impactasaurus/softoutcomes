@@ -67,6 +67,14 @@ module.exports = {
         respectDNT: true
       },
     },
+    {
+      resolve: 'gatsby-plugin-sentry',
+      options: {
+        dsn: 'https://fa1216c5e5f544d598553f5ec458f6ee@o97926.ingest.sentry.io/5208432',
+        environment: process.env.NODE_ENV,
+        enabled: (() => ['production', 'stage'].indexOf(process.env.NODE_ENV) !== -1)()
+      }
+    },
     `gatsby-plugin-offline`,
     'gatsby-plugin-robots-txt',
     `gatsby-plugin-sitemap`,
