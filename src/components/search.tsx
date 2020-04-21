@@ -13,7 +13,7 @@ const Search = (p: IProps) => {
   const [query, setQuery] = useState(p.initial || "");
   // if the initial prop is updated, we should update our local state
   useEffect(() => {
-    setQuery(p.initial);
+    setQuery(p.initial || "");
   }, [p.initial]);
 
   const queryChange = (event) => setQuery(event.target.value);
@@ -23,7 +23,6 @@ const Search = (p: IProps) => {
   };
 
   const buttonVariant = p.dark ? "outline-primary" : "primary";
-
   return (
     <Form inline onSubmit={querySubmit} style={{justifyContent: "center"}}>
       <FormControl type="text" placeholder="Search" className="mr-sm-2" value={query} onChange={queryChange} />

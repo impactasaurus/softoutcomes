@@ -9,6 +9,7 @@ import Spinner from "react-bootstrap/Spinner"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Search from "../components/search"
+import Alert from "react-bootstrap/Alert"
 
 interface IQuestionnaire {
   name: string;
@@ -21,6 +22,16 @@ const Loading = (
     <Spinner animation="border" variant="secondary" />
   </div>
 );
+
+const Error = (
+  <Alert variant="danger">Failed to load search results. Please try refreshing the page</Alert>
+);
+
+const PleaseSearch = (
+  <Alert variant="info">Please enter a search term</Alert>
+);
+
+const isEmptyQuery = (q: string) => !q || q === "";
 
 const Wrapper = (query: string, inner: JSX.Element) => {
   return (
@@ -46,11 +57,13 @@ const SearchPage = () => {
   const query = params.get("q");
 
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<error>();
   const [results, setResults] = useState<IQuestionnaire[]>([]);
   useEffect(() => {
-    if (query === "") {
+    if (isEmptyQuery(query)) {
       return;
     }
+    setError(undefined);
     setLoading(true);
     fetch("https://api.softoutcomes.org/v1/query", {
       method: 'post',
@@ -65,11 +78,23 @@ const SearchPage = () => {
     .then(res => {
       setResults(res.data.search.questionnaires);
       setLoading(false);
+    })
+    .catch(err => {
+      setError(err);
+      setLoading(false);
     });
   }, [query]);
 
+  if (isEmptyQuery(query)) {
+    return Wrapper(query, PleaseSearch);
+  }
+
   if (loading) {
     return Wrapper(query, Loading);
+  }
+
+  if (error) {
+    return Wrapper(query, Error);
   }
 
   return Wrapper(query, <List questionnaires={results} />);
