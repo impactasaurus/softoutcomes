@@ -31,6 +31,10 @@ const PleaseSearch = (
   <Alert variant="info">Please enter a search term</Alert>
 );
 
+const NoResults = ({q}) => (
+  <Alert variant="info">{`No questionnaires match '${q}'. Please try something else`}</Alert>
+);
+
 const isEmptyQuery = (q: string) => !q || q === "";
 
 const Wrapper = (query: string, inner: JSX.Element) => {
@@ -95,6 +99,10 @@ const SearchPage = () => {
 
   if (error) {
     return Wrapper(query, Error);
+  }
+
+  if (results.length === 0) {
+    return Wrapper(query, <NoResults q={query} />);
   }
 
   return Wrapper(query, <List questionnaires={results} />);
