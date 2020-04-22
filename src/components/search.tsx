@@ -4,12 +4,12 @@ import FormControl from "react-bootstrap/FormControl"
 import Button from "react-bootstrap/Button"
 import {navigate} from "gatsby"
 
-interface IProps {
+interface Props {
   initial?: string
   dark?: boolean // default false
 }
 
-const Search = (p: IProps) => {
+const Search = (p: Props) => {
   const [query, setQuery] = useState(p.initial || "")
   // if the initial prop is updated, we should update our local state
   useEffect(() => {

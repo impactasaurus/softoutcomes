@@ -16,11 +16,11 @@ const IndexPage = () => (
       <h2>Soft Outcomes</h2>
       <blockquote className="blockquote">
         <p className="mb-0">
-          "Soft outcomes are outcomes that are less easy to observe or measure, or which involve some form of change
-          inside people, such as a change in attitude or a change in the way they see themselves"
+          &quot;Soft outcomes are outcomes that are less easy to observe or measure, or which involve some form of
+          change inside people, such as a change in attitude or a change in the way they see themselves&quot;
         </p>
         <footer className="blockquote-footer">
-          <a href="https://www.inspiringimpact.org/what-is-impact-practice/">Inspiring Impact's jargon buster</a>
+          <a href="https://www.inspiringimpact.org/what-is-impact-practice/">Inspiring Impact&apos;s jargon buster</a>
         </footer>
       </blockquote>
     </Hero>

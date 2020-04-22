@@ -11,7 +11,7 @@ import Col from "react-bootstrap/Col"
 import Search from "../components/search"
 import Alert from "react-bootstrap/Alert"
 
-interface IQuestionnaire {
+interface Questionnaire {
   name: string
   description: string
   id: string
@@ -27,7 +27,9 @@ const Error = <Alert variant="danger">Failed to load search results. Please try 
 
 const PleaseSearch = <Alert variant="info">Please enter a search term</Alert>
 
-const NoResults = ({q}) => <Alert variant="info">{`No questionnaires match '${q}'. Please try something else`}</Alert>
+const NoResults = ({q}: {q: string}) => (
+  <Alert variant="info">{`No questionnaires match '${q}'. Please try something else`}</Alert>
+)
 
 const isEmptyQuery = (q: string) => !q || q === ""
 
@@ -54,7 +56,7 @@ const SearchPage = () => {
 
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<error>()
-  const [results, setResults] = useState<IQuestionnaire[]>([])
+  const [results, setResults] = useState<Questionnaire[]>([])
   useEffect(() => {
     if (isEmptyQuery(query)) {
       return

@@ -4,14 +4,14 @@ import Container from "react-bootstrap/Container"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Hero from "../components/hero"
-import Links, {ILink} from "../components/questionnaire/links"
+import Links, {Link} from "../components/questionnaire/links"
 import Legal from "../components/questionnaire/legal"
-import Questions, {IQuestion} from "../components/questionnaire/questions"
-import Scores, {IScore} from "../components/questionnaire/scorings"
+import Questions, {Question} from "../components/questionnaire/questions"
+import Scores, {Score} from "../components/questionnaire/scorings"
 import Col from "react-bootstrap/Col"
 import Row from "react-bootstrap/Row"
 
-interface IProps {
+interface Props {
   pageContext: {
     id: string
   }
@@ -21,18 +21,18 @@ interface IProps {
         id: string
         name: string
         description: string
-        links: ILink[]
+        links: Link[]
         attribution?: string
         license: string
         instructions?: string
-        questions: IQuestion[]
-        scorings?: IScore[]
+        questions: Question[]
+        scorings?: Score[]
       }
     }
   }
 }
 
-const Questionnaire = (props: IProps) => {
+const Questionnaire = (props: Props) => {
   const questionnaire = props.data.softoutcomes.questionnaire
   return (
     <Layout footerMargin={true}>

@@ -1,12 +1,12 @@
 import React from "react"
 import Section from "../section"
 
-interface IProps {
+interface Props {
   attribution?: string
   license: string
 }
 
-const Legal = (p: IProps) => {
+const Legal = (p: Props) => {
   return (
     <Section
       header="Legal"

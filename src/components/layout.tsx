@@ -3,12 +3,12 @@ import React from "react"
 import Header from "./header"
 import Footer from "./footer"
 
-interface IProps {
+interface Props {
   children: JSX.Element | JSX.Element[]
   footerMargin?: boolean
 }
 
-const Layout = ({children, footerMargin}: IProps) => {
+const Layout = ({children, footerMargin}: Props) => {
   return (
     <div className="app">
       <Header />

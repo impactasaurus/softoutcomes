@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 const slgify = require("slugify")
 
 // not using export as it is used within gatsby-node.js

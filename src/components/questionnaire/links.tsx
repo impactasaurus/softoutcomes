@@ -1,20 +1,20 @@
 import React from "react"
 import Section from "../section"
 
-export interface ILink {
+export interface Link {
   name: string
   description?: string
   url: string
 }
 
-interface IProps {
-  links: ILink[]
+interface Props {
+  links: Link[]
 }
 
-const Links = (p: IProps) => {
+const Links = (p: Props) => {
   const links: JSX.Element[] = p.links.map(l => (
     <div key={l.name}>
-      <a target="_blank" href={l.url}>
+      <a target="_blank" rel="noopener noreferrer" href={l.url}>
         {l.name}
       </a>
     </div>

@@ -21,7 +21,7 @@ const Logo = ({inverse}) => {
   )
 }
 
-Paging.propTypes = {
+Logo.propTypes = {
   inverse: PropTypes.bool,
 }
 

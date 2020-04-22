@@ -3,18 +3,18 @@ import React, {CSSProperties} from "react"
 import {slugify} from "../../helpers/url"
 import ListGroup from "react-bootstrap/ListGroup"
 
-interface IQuestionnaire {
+interface Questionnaire {
   id: string
   name: string
   description: string
 }
 
-interface IProps {
-  questionnaires: IQuestionnaire[]
+interface Props {
+  questionnaires: Questionnaire[]
   style?: CSSProperties
 }
 
-const List = (p: IProps) => {
+const List = (p: Props) => {
   const entries: JSX.Element[] = p.questionnaires.map(q => (
     <ListGroup.Item key={q.id}>
       <Link to={`/questionnaires/${slugify(q.name)}`}>

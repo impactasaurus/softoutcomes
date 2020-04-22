@@ -2,7 +2,7 @@ import React, {CSSProperties} from "react"
 import Pagination from "react-bootstrap/Pagination"
 import {navigate} from "gatsby"
 
-interface IProps {
+interface Props {
   numPages: number
   urlGenerator: (pg: number) => string
   id: string
@@ -10,7 +10,7 @@ interface IProps {
   style?: CSSProperties
 }
 
-const Paging = (p: IProps) => {
+const Paging = (p: Props) => {
   const pages = []
   const go = pg => navigate(p.urlGenerator(pg))
   for (let ct = 1; ct <= p.numPages; ct++) {

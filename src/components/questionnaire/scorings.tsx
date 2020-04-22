@@ -1,19 +1,19 @@
 import React from "react"
 import Section from "../section"
 
-export interface IScore {
+export interface Score {
   name: string
 }
 
-interface IProps {
-  scores?: IScore[]
+interface Props {
+  scores?: Score[]
 }
 
-const Score = (p: {score: IScore}) => {
+const ScoreView = (p: {score: Score}) => {
   return <p>{p.score.name}</p>
 }
 
-const Scores = (p: IProps) => {
+const Scores = (p: Props) => {
   if (!p.scores || p.scores.length === 0) {
     return <div />
   }
@@ -23,7 +23,7 @@ const Scores = (p: IProps) => {
       body={
         <div>
           {p.scores.map(s => (
-            <Score score={s} />
+            <ScoreView key={s.name} score={s} />
           ))}
         </div>
       }

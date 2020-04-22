@@ -1,20 +1,20 @@
 import React from "react"
 import Section from "../section"
 
-export interface IQuestion {
+export interface Question {
   question: string
 }
 
-interface IProps {
+interface Props {
   instructions?: string
-  questions: IQuestion[]
+  questions: Question[]
 }
 
-const Question = (p: {question: IQuestion}) => {
-  return <p>{p.question.question}</p>
+const QuestionView = (p: {question: Question}) => {
+  return <p key={p.question.question}>{p.question.question}</p>
 }
 
-const Questions = (p: IProps) => {
+const Questions = (p: Props) => {
   return (
     <Section
       header="Questions"
@@ -23,7 +23,7 @@ const Questions = (p: IProps) => {
           {p.instructions && <p>{p.instructions}</p>}
           <div>
             {p.questions.map(q => (
-              <Question question={q} />
+              <QuestionView key={q.question} question={q} />
             ))}
           </div>
         </div>
