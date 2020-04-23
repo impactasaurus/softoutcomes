@@ -10,6 +10,7 @@ import Questions, {Question} from "../components/questionnaire/questions"
 import Scores, {Score} from "../components/questionnaire/scorings"
 import Col from "react-bootstrap/Col"
 import Row from "react-bootstrap/Row"
+import Import from "../components/questionnaire/import"
 
 interface Props {
   pageContext: {
@@ -52,6 +53,7 @@ const Questionnaire = (props: Props) => {
           <Col xl={3} lg={{span: 4, order: 0}} md={{span: 12, order: 2}}>
             <Links links={questionnaire.links} />
             <Legal license={questionnaire.license} attribution={questionnaire.attribution} />
+            <Import questionnaire={questionnaire.id} />
           </Col>
           <Col>
             <Questions questions={questionnaire.questions} instructions={questionnaire.instructions} />

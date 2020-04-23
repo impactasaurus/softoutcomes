@@ -1,6 +1,5 @@
 import * as React from "react"
 import PropTypes from "prop-types"
-import Paging from "./paging"
 
 const Logo = ({inverse}) => {
   let src = "/images/p-logo-filled.svg"

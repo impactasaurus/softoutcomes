@@ -14,7 +14,7 @@ interface Props {
 const Links = (p: Props) => {
   const links: JSX.Element[] = p.links.map(l => (
     <div key={l.name}>
-      <a target="_blank" rel="noopener noreferrer" href={l.url}>
+      <a target="_blank" rel="noopener" href={l.url}>
         {l.name}
       </a>
     </div>
