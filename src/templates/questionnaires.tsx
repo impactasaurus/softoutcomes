@@ -1,4 +1,3 @@
-import PropTypes from "prop-types"
 import React from "react"
 import {graphql} from "gatsby"
 import Container from "react-bootstrap/Container"
@@ -7,14 +6,51 @@ import SEO from "../components/seo"
 import Paging from "../components/paging"
 import List from "../components/questionnaire/list"
 
-const Questionnaires = props => {
+interface Question {
+  id: string
+}
+
+interface Link {
+  name: string
+}
+
+interface Questionnaire {
+  id: string
+  name: string
+  description: string
+  questions: Question[]
+  links: Link[]
+}
+
+interface Props {
+  pageContext: {
+    limit: number
+    page: number
+    numPages: number
+  }
+  data: {
+    softoutcomes: {
+      questionnaires: {
+        questionnaires: Questionnaire[]
+      }
+    }
+  }
+}
+
+const Questionnaires = (props: Props) => {
   const questionnaires = props.data.softoutcomes.questionnaires.questionnaires
   return (
     <Layout footerMargin={true}>
       <SEO title="Questionnaires" />
       <Container>
         <List
-          questionnaires={questionnaires}
+          questionnaires={questionnaires.map(q => ({
+            id: q.id,
+            name: q.name,
+            description: q.description,
+            numLinks: q.links.length,
+            numQuestions: q.questions.length,
+          }))}
           style={{
             marginTop: "2rem",
             marginBottom: "0.5rem",
@@ -31,27 +67,6 @@ const Questionnaires = props => {
   )
 }
 
-Questionnaires.propTypes = {
-  pageContext: PropTypes.exact({
-    limit: PropTypes.number.isRequired,
-    page: PropTypes.number.isRequired,
-    numPages: PropTypes.number.isRequired,
-  }),
-  data: PropTypes.exact({
-    softoutcomes: PropTypes.exact({
-      questionnaires: PropTypes.exact({
-        questionnaires: PropTypes.arrayOf(
-          PropTypes.exact({
-            id: PropTypes.string.isRequired,
-            name: PropTypes.string.isRequired,
-            description: PropTypes.string.isRequired,
-          })
-        ),
-      }),
-    }),
-  }),
-}
-
 export default Questionnaires
 
 export const pageQuery = graphql`
@@ -62,6 +77,12 @@ export const pageQuery = graphql`
           id
           name
           description
+          questions {
+            id
+          }
+          links {
+            name
+          }
         }
       }
     }

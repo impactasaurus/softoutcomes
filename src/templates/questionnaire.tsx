@@ -11,6 +11,7 @@ import Scores, {Score} from "../components/questionnaire/scorings"
 import Col from "react-bootstrap/Col"
 import Row from "react-bootstrap/Row"
 import Import from "../components/questionnaire/import"
+import Summary from "../components/questionnaire/summary"
 
 interface Props {
   pageContext: {
@@ -40,7 +41,11 @@ const Questionnaire = (props: Props) => {
       <SEO title={questionnaire.name} />
       <Hero mini={true}>
         <h2>{questionnaire.name}</h2>
-        <p>{questionnaire.description}</p>
+        <p>
+          {questionnaire.description}
+          <br />
+          <Summary numQuestions={questionnaire.questions.length} numLinks={questionnaire.links.length} />
+        </p>
       </Hero>
       <Container
         fluid

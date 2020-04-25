@@ -2,11 +2,14 @@ import {Link} from "gatsby"
 import React, {CSSProperties} from "react"
 import {slugify} from "../../helpers/url"
 import ListGroup from "react-bootstrap/ListGroup"
+import Summary from "./summary"
 
 interface Questionnaire {
   id: string
   name: string
   description: string
+  numQuestions: number
+  numLinks: number
 }
 
 interface Props {
@@ -21,6 +24,7 @@ const List = (p: Props) => {
         <h5>{q.name}</h5>
       </Link>
       <p style={{marginBottom: 0}}>{q.description}</p>
+      <Summary numQuestions={q.numQuestions} numLinks={q.numLinks} />
     </ListGroup.Item>
   ))
   return (

@@ -45,7 +45,7 @@ exports.createPages = async ({ actions, graphql }) => {
   for(let ct = 0; ct < numPages; ct++) {
     actions.createPage({
       path: `questionnaires/${ct+1}`,
-      component: path.resolve(`./src/templates/questionnaires.js`),
+      component: path.resolve(`./src/templates/questionnaires.tsx`),
       context: {
         limit,
         page: ct,
@@ -55,7 +55,7 @@ exports.createPages = async ({ actions, graphql }) => {
   }
   actions.createPage({
     path: `questionnaires`,
-    component: path.resolve(`./src/templates/questionnaires.js`),
+    component: path.resolve(`./src/templates/questionnaires.tsx`),
     context: {
       limit,
       page: 0,

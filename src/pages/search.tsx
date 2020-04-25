@@ -11,10 +11,20 @@ import Col from "react-bootstrap/Col"
 import Search from "../components/search"
 import Alert from "react-bootstrap/Alert"
 
+interface Question {
+  id: string
+}
+
+interface Link {
+  name: string
+}
+
 interface Questionnaire {
   name: string
   description: string
   id: string
+  questions: Question[]
+  links: Link[]
 }
 
 const Loading = (
@@ -66,7 +76,8 @@ const SearchPage = () => {
     fetch("https://api.softoutcomes.org/v1/query", {
       method: "post",
       body: JSON.stringify({
-        query: "query($q: String!){search(query:$q,limit:10,page:0){questionnaires{id, name, description}}}",
+        query:
+          "query($q: String!){search(query:$q,limit:10,page:0){questionnaires{id, name, description, questions{id}, links{name}}}}",
         variables: {
           q: query,
         },
@@ -99,7 +110,18 @@ const SearchPage = () => {
     return Wrapper(query, <NoResults q={query} />)
   }
 
-  return Wrapper(query, <List questionnaires={results} />)
+  return Wrapper(
+    query,
+    <List
+      questionnaires={results.map(q => ({
+        id: q.id,
+        name: q.name,
+        description: q.description,
+        numQuestions: q.questions.length,
+        numLinks: q.links.length,
+      }))}
+    />
+  )
 }
 
 export default SearchPage
