@@ -88,7 +88,14 @@ export const pageQuery = graphql`
           description
         }
         questions {
+          id
           question
+          ... on SO_LikertQuestion {
+            scale {
+              value
+              label
+            }
+          }
         }
         scorings {
           name
