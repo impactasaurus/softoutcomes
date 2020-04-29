@@ -1,8 +1,7 @@
 import React from "react"
 import Section from "../section"
 import { commonLabels } from "../../helpers/questionnaire"
-import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
+import Table from "react-bootstrap/Table"
 
 export interface Point {
   value: number
@@ -18,6 +17,25 @@ export interface Question {
 interface Props {
   instructions?: string
   questions: Question[]
+  questionnaireID: string
+}
+
+const modeScale = (scales: Point[][]): Point[] => {
+  const count = {};
+  scales.forEach((s) => {
+    const hash = JSON.stringify(s);
+    if (count[hash] === undefined) {
+      count[hash] = 0;
+    }
+    count[hash]++
+  })
+  const mode = Object.keys(count).reduce((most, k) => {
+    if(most === undefined || count[most] < count[k]) {
+      return k
+    }
+    return most
+  }, undefined);
+  return JSON.parse(mode);
 }
 
 const QuestionView = (p: {question: Question}) => {
@@ -36,37 +54,34 @@ const Instructions = (p: {instructions?: string}): JSX.Element|undefined => {
   )
 }
 
-const Scale = (p: {questions: Question[]}): JSX.Element|undefined => {
+const Scale = (p: {questionnaireID: string, questions: Question[]}): JSX.Element|undefined => {
   const hasCommonScale = commonLabels(p.questions.map(q => (q.scale || []).map(s => s.label)));
   if (!hasCommonScale) {
     return undefined
   }
-  const scale = p.questions[0].scale;
-  const getMarks = () => {
-    const marks = {};
-    scale.forEach((p: Point) => {
-      marks[p.value] = p.label;
-    });
-    return marks;
-  }
+  const scale = modeScale(p.questions.map(q => q.scale));
   return (
     <>
       <h6>Scale</h6>
-      <p>Common = {hasCommonScale ? 'true':'false'}</p>
-      <Slider
-        min={scale[0].value}
-        max={scale[scale.length-1].value}
-        dots={true}
-        disabled={true}
-        marks={getMarks()}
-      />
+      <Table bordered hover size="sm">
+        <thead>
+          <tr>
+            {scale.map((m, i) => <th style={{fontWeight: "normal"}} key={i}>{m.label}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            {scale.map((m, i) => <td key={i}>{m.value}</td>)}
+          </tr>
+        </tbody>
+      </Table>
     </>
   )
 }
 
 const Questions = (p: Props) => {
   const instructions = Instructions({instructions:p.instructions})
-  const scale = Scale({questions:p.questions})
+  const scale = Scale({questions:p.questions, questionnaireID:p.questionnaireID})
   return (
     <Section
       header="Questionnaire"
