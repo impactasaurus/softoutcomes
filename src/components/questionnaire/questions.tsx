@@ -21,11 +21,13 @@ interface Props {
 }
 
 const modeScale = (scales: Point[][]): Point[] => {
-  const count = {};
+  const count: { [id:string]: number} = {};
+  const LUT: { [id: string] : Point[] }  = {};
   scales.forEach((s) => {
     const hash = JSON.stringify(s);
     if (count[hash] === undefined) {
       count[hash] = 0;
+      LUT[hash] = s
     }
     count[hash]++
   })
@@ -33,13 +35,27 @@ const modeScale = (scales: Point[][]): Point[] => {
     if(most === undefined || count[most] < count[k]) {
       return k
     }
+    if (count[most] === count[k]) {
+      // if equal count, prefer the scale with incrementing values
+      if(LUT[k][0].value < LUT[most][0].value) {
+        return k
+      }
+    }
     return most
   }, undefined);
-  return JSON.parse(mode);
+  return LUT[mode]
 }
 
-const QuestionView = (p: {question: Question}) => {
-  return <p key={p.question.question}>{p.question.question}</p>
+const QuestionView = (p: {question: Question, questions: Question[]}) => {
+  let reversed = <span />
+  const hasCommonScale = commonLabels(p.questions.map(q => (q.scale || []).map(s => s.label)));
+  if(hasCommonScale) {
+    const mode = modeScale(p.questions.map(q => q.scale))
+    if (mode[0].value !== p.question.scale[0].value) {
+      reversed = <span>(R)</span>
+    }
+  }
+  return <p key={p.question.id}>{p.question.question} {reversed}</p>
 }
 
 const Instructions = (p: {instructions?: string}): JSX.Element|undefined => {
@@ -96,7 +112,7 @@ const Questions = (p: Props) => {
           <div>
             <h6>Questions</h6>
             {p.questions.map(q => (
-              <QuestionView key={q.question} question={q} />
+              <QuestionView key={q.question} question={q} questions={p.questions} />
             ))}
           </div>
           {scale !== undefined ? (
