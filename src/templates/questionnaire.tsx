@@ -61,7 +61,7 @@ const Questionnaire = (props: Props) => {
             <Import questionnaire={questionnaire.id} />
           </Col>
           <Col>
-            <Questions questions={questionnaire.questions} instructions={questionnaire.instructions} />
+            <Questions questionnaireID={questionnaire.id} questions={questionnaire.questions} instructions={questionnaire.instructions} />
             <Scores scores={questionnaire.scorings} />
           </Col>
         </Row>
@@ -88,7 +88,14 @@ export const pageQuery = graphql`
           description
         }
         questions {
+          id
           question
+          ... on SO_LikertQuestion {
+            scale {
+              value
+              label
+            }
+          }
         }
         scorings {
           name
