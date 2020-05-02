@@ -20,7 +20,9 @@ interface Props {
   questionnaireID: string
 }
 
-const modeScale = (scales: Point[][]): Point[] => {
+const Reversed = () => (<span style={{color: "red"}}>*</span>)
+
+const modeScale = (scales: Point[][]): {scale: Point[], count: number} => {
   const count: { [id:string]: number} = {};
   const LUT: { [id: string] : Point[] }  = {};
   scales.forEach((s) => {
@@ -43,19 +45,31 @@ const modeScale = (scales: Point[][]): Point[] => {
     }
     return most
   }, undefined);
-  return LUT[mode]
+  return {
+    scale: LUT[mode],
+    count: count[mode]
+  }
 }
 
-const QuestionView = (p: {question: Question, questions: Question[]}) => {
-  let reversed = <span />
+const QuestionView = (p: {question: Question, questions: Question[], idx: number}) => {
   const hasCommonScale = commonLabels(p.questions.map(q => (q.scale || []).map(s => s.label)));
+  const mode = modeScale(p.questions.map(q => q.scale)).scale
+  let reversed = <span />
   if(hasCommonScale) {
-    const mode = modeScale(p.questions.map(q => q.scale))
     if (mode[0].value !== p.question.scale[0].value) {
-      reversed = <span>(R)</span>
+      reversed = <Reversed />
     }
+  } else {
+    reversed = (
+      <>
+        <br />
+        <br />
+        <Scale scale={p.question.scale}/>
+        <br />
+      </>
+    )
   }
-  return <p key={p.question.id}>{p.question.question} {reversed}</p>
+  return <p key={p.question.id}>{p.idx}. {p.question.question} {reversed}</p>
 }
 
 const Instructions = (p: {instructions?: string}): JSX.Element|undefined => {
@@ -70,34 +84,43 @@ const Instructions = (p: {instructions?: string}): JSX.Element|undefined => {
   )
 }
 
-const Scale = (p: {questionnaireID: string, questions: Question[]}): JSX.Element|undefined => {
+const Scale = ({scale}: {scale: Point[]}) => {
+  return (
+    <Table bordered size="sm">
+      <thead>
+      <tr>
+        {scale.map((m, i) => <th style={{fontWeight: "normal"}} key={i}>{m.label}</th>)}
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        {scale.map((m, i) => <td key={i}>{m.value}</td>)}
+      </tr>
+      </tbody>
+    </Table>
+  )
+}
+
+const CommonScale = (p: {questionnaireID: string, questions: Question[]}): JSX.Element|undefined => {
   const hasCommonScale = commonLabels(p.questions.map(q => (q.scale || []).map(s => s.label)));
   if (!hasCommonScale) {
     return undefined
   }
-  const scale = modeScale(p.questions.map(q => q.scale));
+  const mode = modeScale(p.questions.map(q => q.scale));
+  const hasReversedQs = mode.count !== p.questions.length;
+
   return (
     <>
       <h6>Scale</h6>
-      <Table bordered hover size="sm">
-        <thead>
-          <tr>
-            {scale.map((m, i) => <th style={{fontWeight: "normal"}} key={i}>{m.label}</th>)}
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            {scale.map((m, i) => <td key={i}>{m.value}</td>)}
-          </tr>
-        </tbody>
-      </Table>
+      <Scale scale={mode.scale}/>
+      {hasReversedQs && <div><Reversed /> indicates that a question uses reversed scorings</div>}
     </>
   )
 }
 
 const Questions = (p: Props) => {
   const instructions = Instructions({instructions:p.instructions})
-  const scale = Scale({questions:p.questions, questionnaireID:p.questionnaireID})
+  const scale = CommonScale({questions:p.questions, questionnaireID:p.questionnaireID})
   return (
     <Section
       header="Questionnaire"
@@ -109,18 +132,18 @@ const Questions = (p: Props) => {
               <hr />
             </>
           ) : <div />}
-          <div>
-            <h6>Questions</h6>
-            {p.questions.map(q => (
-              <QuestionView key={q.question} question={q} questions={p.questions} />
-            ))}
-          </div>
           {scale !== undefined ? (
             <>
-              <hr />
               {scale}
+              <hr />
             </>
           ) : <div />}
+          <div>
+            <h6>Questions</h6>
+            {p.questions.map((q, i) => (
+              <QuestionView key={q.question} question={q} questions={p.questions} idx={i+1} />
+            ))}
+          </div>
         </div>
       }
     />
